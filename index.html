@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html ng-app="frontEnd">
+  <head>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+  <!-- AngularJS v1.6.6 -->
+  <script type="text/javascript" src="angular.min.js"></script>
+  <!-- Outros arquivos -->
+  <link rel="stylesheet" type="text/css" href="index.css" />
+  <script type="text/javascript" src="app.js"></script>
+  <!-- UI.Bootstrap -->
+  <script type="text/javascript" src="ui-bootstrap-tpls-2.5.0.min.js"></script>
+
+  </head>
+
+  <body>
+    <div class="container" ng-controller="tableController">
+      <div class="row header"></div>
+        {{1+2}}
+      <div class="row">
+        <div class="nav flex-column flex-sm-column col-3 menu-opcoes">
+          <a  class="nav-link btn menu-botao" href="#" ng-class="{'active': active1 === true}" ng-click="active1 = !active1; active2=active3=active4=false;  sortType = 'name'; sortReverse = !sortReverse; myFilter={}; showme=false;">
+            ORDENAR NOME
+            <span ng-show="sortType == 'name' && !sortReverse"></span>
+            <span ng-show="sortType == 'name' && sortReverse"></span>
+          </a>
+          <a class="nav-link btn menu-botao" href="#" ng-class="{'active': active2 === true}" ng-click="active2 = !active2; active1=active3=active4=false; sortType = 'dob'; sortReverse = !sortReverse; myFilter={};showme=false">
+            ORDENAR NASCIMENTO
+            <span ng-show="sortType == 'dob' && !sortReverse"></span>
+            <span ng-show="sortType == 'dob' && sortReverse"></span>  
+          </a>
+          <a class="nav-link btn menu-botao" href="#" ng-class="{'active': active3 === true}" ng-click="active3 = true; active1=active2=active4=false; myFilter={gender:'MASCULINO'}; showme=false">
+            FILTRO HOMENS
+          </a>
+          <a class="nav-link btn menu-botao" href="#" ng-class="{'active': active4 === true}" ng-click="active4 = true; active1=active2=active3=false; myFilter={gender:'FEMININO'}; showme=false">
+            FILTRO MULHERES
+          </a>
+        </div>
+        
+        <div class="col-9 usuarios">
+          <form>
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control busca" placeholder="QUALQUER COISA BACANA AQUI PARA SER BUSCADA :)" ng-model="searchUser" ng-click="myFilter={}">
+                </div>      
+              </div>
+          </form>
+          <table class="table table-striped"> 
+            <thead>
+              <tr>
+                <td>
+                  NOME
+                </td>
+                <td>
+                  DT NASCIMENTO
+                </td>
+                <td>
+                  SEXO
+                </td>
+              </tr>
+            </thead>
+          
+          <tbody>
+            <tr ng-repeat="user in users | orderBy:sortType:sortReverse | filter:searchUser | filter:myFilter">
+              <td>{{ user.name | uppercase}}</td>
+              <td>{{ user.dob | date: 'dd/MM/yyyy' }}</td>
+              <td class="text-hide" ng-style="{'background-image': 'url(./{{user.gender}}.png)', 'background-repeat': 'no-repeat'}">{{ user.gender }}</td>
+            </tr>
+          </tbody>
+          
+          </table>
+          
+          <div class="right">
+            <button class="btn adc" ng-click="showme=true">+ADICIONAR</button>
+          </div>
+          
+          <form name="adicionar" class="clear form-horizontal" role="form" ng-submit="addRow()" ng-show="showme">
+            <div class="form-group">
+              <label class="control-label bold">NOME</label>
+              <div>
+                <input type="text" class="form-control" name="name" ng-model="name" ng-pattern="/^[a-zA-Z\s]*$/" />
+              </div>
+            </div>
+
+            <div class="form-group inline nascimento">
+              <label class="control-label bold">DT NASCIMENTO</label>
+              <div class="input-group">
+                <input type="date" class="form-control" b-datepicker name="dob" ng-model="dob" />
+                  <span class="input-group-btn">
+                    <button type="button" data-toggle="datepicker" class="btn btn-default calendar"></button>
+                  </span>
+              </div>
+            </div>
+            <div class="form-group inline">
+              <label class="control-label bold">SEXO</label>
+              <div>
+                <select class="form-control form-control-sm" ng-model="gender">
+                  <option value="FEMININO">FEMININO</option>
+                  <option value="MASCULINO">MASCULINO</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="right">		
+              <div class="inline">
+                <button class="btn cancelar" type="reset" ng-click="reset(); showme=false">CANCELAR</button>
+              </div>
+              <div class="inline">
+                <button class="btn salvar" type="submit" ng-disabled="adicionar.$pristine || adicionar.$invalid" ng-click="showme=false">SALVAR</button>
+              </div>
+            </div>
+      
+          </form>
+          <div ng-hide="showme"></div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

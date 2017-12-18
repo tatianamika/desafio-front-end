@@ -1,0 +1,90 @@
+#body {
+  height: 100%;
+  width: 100%;
+}
+
+.header{
+  background-color: #081736;
+  height: 60px;
+}
+
+thead {
+  font-weight: bold;
+}
+
+.menu-opcoes {
+  padding-top: 10px;
+  background-color: #e2e2e2;
+  min-height: calc(100vh - 60px);
+}
+
+.menu-botao.btn {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.menu-botao.btn.active {
+  background-color:#081736;
+  color: white;
+}
+
+.btn.adc{
+  background-color:#081736;
+  color: white;
+  font-weight: bold;
+}
+
+.btn.salvar{
+  background-color:#081736;
+  color: white;
+  font-weight: bold;
+  width: 120px;
+  margin-top: 35px;
+}
+
+.btn.cancelar{
+  background-color: #d10d14;
+  color: white;
+  font-weight: bold;
+  width: 120px;
+  margin-top: 35px;
+}
+
+.nascimento {
+  margin-right: 20px;
+}
+.right {
+  float: right;
+}
+
+.alinhar{
+  align-content: flex-end;
+}
+
+.inline{
+  display: inline-block;
+}
+
+.usuarios{
+  padding-top: 15px;
+}
+
+.clear {
+  clear: both;
+}
+
+.calendar {
+  background-image: url("./calendar.png");
+  width: 40px;
+}
+
+.busca{
+  background-color: #fafafa;
+}
+
+.bold {
+  font-weight: bold;
+}
